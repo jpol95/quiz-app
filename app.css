@@ -50,6 +50,7 @@ h1{
 }
 
 
+
 @media all and (min-width: 800px) {
  h1{
    text-align: center;
@@ -94,3 +95,4 @@ h1{
    align-content: flex-end;
  }
 }
+
