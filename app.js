@@ -56,3 +56,44 @@ const store = {
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+function startPageTemplate() {
+  // define variable to hold wireframe start page html
+  // return that variable
+  let startPage = `  <div class ="container">
+    <h2>US Geography Quiz</h2>
+    <img class = "image" src ="#" alt="Opening picture">
+    <button id="start">New Quiz</button>
+  </div>`;
+  return startPage;
+};
+
+function handleStartQuiz() {
+//add event listener to parent element and reference child that will be clicked
+// reaction function should alter store.quizStarted to true
+// render page
+  $('main').on('click', '#start', function() {
+    store.quizStarted = true;
+    render();
+  })
+
+}
+
+function render() {
+  //if else statement to check if the quiz has started
+  if(store.quizStarted === false) {
+    console.log('Quiz has not started');
+    $('main').html(startPageTemplate());
+  } else if (store.quizStarted === true) {
+    console.log('Quiz has started');
+    $('main').html(questionPageTemplate());
+    
+  }
+}
+
+function startUp() {
+  render();
+  handleStartQuiz();
+}
+
+$(startUp);
