@@ -124,7 +124,7 @@ function questionPageTemplate(){
     display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}" required>
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
     };
-  display += `<button type="submit"> Submit</button></form></div>`;
+  display += `<br><button class="submit" type="submit"> Submit</button></form></div>`;
   return display;
 }
 
@@ -249,4 +249,3 @@ function startUp() {
 }
 
 $(startUp())
-  
