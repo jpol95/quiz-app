@@ -118,9 +118,10 @@ function startPageTemplate() {
 
 function questionPageTemplate(){
   let currentQuestion = store.questions[store.questionNumber];
-  let display = `<div class="container"><form class="question"> <h2> ${currentQuestion.question}<br><br>` 
+  let currentQNumber = store.questionNumber + 1
+  let display = `<div class="container"><form class="question"> <h2>${currentQNumber}. ${currentQuestion.question}<br><br>` 
   for (let i = 0; i < 4; i++){
-    display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
+    display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}" required>
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
     };
   display += `<button type="submit"> Submit</button></form></div>`;
@@ -162,21 +163,26 @@ function nextQuestionButton(){
 
 function results() {
 
-  let templateHTML = 
-  `<div class = "container">  
-  <h1 id="question"> Your Results!</h2>
-  <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
-  <button id="again"> Try Again? </button>
-    </div>`;
-    
-  $('main').html(templateHTML);
   $('main').on('click', '#again', function() {
     store.quizStarted = false;
     store.questionNumber = 0;
     store.score = 0;
+
+    for(let question of store.questions){
+      question.gotCorrect = null;
+    }
     render()
   });
 
+  }
+
+  function resultsTemplate(){
+    
+    return `<div class = "container">  
+  <h1 id="question"> Your Results!</h2>
+  <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
+  <button id="again"> Try Again? </button>
+    </div>`;
   }
 //Display the background image
 //inpage template
@@ -213,7 +219,7 @@ function handleQuestionSubmit(){
 
 function render() {
   //if else statement to check if the quiz has started
-  if (store.questionNumber > 4) return $('main').html(results())
+  if (store.questionNumber > 4) return $('main').html(resultsTemplate())
   if(store.quizStarted === false) {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
@@ -235,6 +241,7 @@ function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
+  results();
 
   nextQuestionButton()
 
