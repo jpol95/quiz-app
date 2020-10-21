@@ -98,6 +98,24 @@ const store = {
 
 // These functions return HTML templates
 
+/********** RENDER FUNCTION(S) **********/
+
+// This function conditionally replaces the contents of the <main> tag based on the state of the store
+/********** EVENT HANDLER FUNCTIONS **********/
+
+// These functions handle events (submit, click, etc)
+
+
+function startPageTemplate() {
+  // define variable to hold wireframe start page html
+  // return that variable
+  let startPage = `  <div class ="container">
+    <h2 id="title">US Geography Quiz</h2>
+    <button id="start">New Quiz</button>
+  </div>`;
+  return startPage;
+}
+
 function questionPageTemplate(){
   let currentQuestion = store.questions[store.questionNumber];
   let display = `<div class="container"><form class="question"> <h2> ${currentQuestion.question}<br><br>` 
@@ -109,16 +127,25 @@ function questionPageTemplate(){
   return display;
 }
 
+function correctAnswerTemplate(){
+  return `<div class= "container">
+  <h2>Correct!</h2>
+  <h3>${store.questions[store.questionNumber].correctAnswer}<h3>
+  <h3>Score:${store.score}</h3>
+  <button id= "next">Next</button>
+  </div>`;
+  //store.currentQuestion++;
+  
+}
 
-/********** RENDER FUNCTION(S) **********/
-
-// This function conditionally replaces the contents of the <main> tag based on the state of the store
-/********** EVENT HANDLER FUNCTIONS **********/
-
-// These functions handle events (submit, click, etc)
-
-
-
+function incorrectAnswerTemplate(){
+  return `<div class= "container">
+  <h2>Incorrect!</h2>
+  <h3>Correct answer is:${store.questions[store.questionNumber].correctAnswer}</h3>
+  <h3>Score:${store.score}</h3>
+  <button id= "next">Next</button>
+  </div>`;
+}
 //End Game
 //Get the Score to display correct score
 function results() {
@@ -140,38 +167,16 @@ function results() {
 
 }
 
-function correctAnswer(){
-  return `<div class= "container">
-  <h2>Correct!</h2>
-  <h3>${store.questions[store.questionNumber].correctAnswer}<h3>
-  <h3>Score:${store.score}</h3>
-  <button id= "next">Next</button>
-  </div>`,
-  store.currentQuestion++;
-  
-}
-
-function incorrectAnswer(){
-  return `<div class= "container">
-  <h2>Incorrect!</h2>
-  <h3>Correct answer is:${store.questions[store.questionNumber].correctAnswer}</h3>
-  <h3>Score:${store.score}</h3>
-  <button id= "next">Next</button>
-  </div>`,
-  store.currentQuestion++;
-}
 
 function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
-
     e.preventDefault();
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
-       currentQuestion.gotCorrect = true;
-
+        currentQuestion.gotCorrect = true;
+        store.score++;
     } else {
-      incorrectAnswer();
       currentQuestion.gotCorrect = false;
     };
     render()
@@ -181,15 +186,6 @@ function handleQuestionSubmit(){
 
 
 
-function startPageTemplate() {
-  // define variable to hold wireframe start page html
-  // return that variable
-  let startPage = `  <div class ="container">
-    <h2 id="title">US Geography Quiz</h2>
-    <button id="start">New Quiz</button>
-  </div>`;
-  return startPage;
-}
 
 function handleStartQuiz() {
 //add event listener to parent element and reference child that will be clicked
@@ -219,7 +215,7 @@ function render() {
       } else if((store.questions[store.questionNumber].gotCorrect === true)) {
         $('main').html(correctAnswerTemplate());
       } else {
-        $('main').html(wrongAnswerTemplate());
+        $('main').html(incorrectAnswerTemplate());
       }
     }
   }
