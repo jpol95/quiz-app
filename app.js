@@ -148,6 +148,16 @@ function incorrectAnswerTemplate(){
 }
 //End Game
 //Get the Score to display correct score
+
+function nextQuestionButton(){
+  $('main').on('click', '#next', function(e){
+    console.log("Hello")
+    e.preventDefault()
+    store.questionNumber++
+    render()
+  })
+}
+
 function results() {
   let templateHTML = 
   `<div class = "container">  
@@ -168,40 +178,14 @@ function results() {
 }
 
 
-function correctAnswerTemplate(){
-  return `<div class= "container">
-  <h2>Correct!</h2>
-  <h3>${store.questions[store.questionNumber].correctAnswer}<h3>
-  <h3>Score:${store.score}</h3>
-  <button id= "next">Next</button>
-  </div>`,
-  store.currentQuestion++;
-  
-}
-
-function incorrectAnswerTemplate(){
-  return `<div class= "container">
-  <h2>Incorrect!</h2>
-  <h3>Correct answer is:${store.questions[store.questionNumber].correctAnswer}</h3>
-  <h3>Score:${store.score}</h3>
-  <button id= "next">Next</button>
-  </div>`,
-  store.currentQuestion++;
-}
-
-function nextQuestionButton(){
-  $('main').on('click', '#next', function(){
-    render()
-  })
-}
-
 function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
     e.preventDefault();
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
-       currentQuestion.gotCorrect = true;
+        currentQuestion.gotCorrect = true;
+        store.score++;
     } else {
       currentQuestion.gotCorrect = false;
     };
@@ -251,11 +235,9 @@ function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
-  incorrectAnswer();
-  correctAnswer(); 
+  nextQuestionButton()
+
 
 }
 
 $(startUp())
-  
-
