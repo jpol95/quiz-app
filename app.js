@@ -107,6 +107,32 @@ function questionPageTemplate(){
 
 // These functions handle events (submit, click, etc)
 
+
+
+//End Game
+//Get the Score to display correct score
+function results() {
+  let templateHTML = 
+  `<div class = "container">  
+  <h1 id="question" Your Results!</h2>
+  <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
+  <button id="try again"> Try Again? </button>
+    </div>`;
+    
+  $('main').html(templateHTML);
+  $('#again').on('click', function() {
+    store.quizStarted = false;
+    store.questionNumber = 0;
+    store.score = 0;
+    loadQuestion(store);
+  });
+//Display the background image
+
+
+
+}
+
+
 function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
     e.preventDefault();
@@ -165,4 +191,5 @@ function startUp() {
 }
 
 $(startUp);
+
 
