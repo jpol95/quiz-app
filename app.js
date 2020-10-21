@@ -72,7 +72,9 @@ function handleStartQuiz() {
 //add event listener to parent element and reference child that will be clicked
 // reaction function should alter store.quizStarted to true
 // render page
-  $('main').on('click', '#start', function() {
+  $('main').on('click', '#start', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
     store.quizStarted = true;
     render();
   })
@@ -82,18 +84,19 @@ function handleStartQuiz() {
 function render() {
   //if else statement to check if the quiz has started
   if(store.quizStarted === false) {
-    console.log('Quiz has not started');
+    console.log('Quiz is ready to start');
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
     console.log('Quiz has started');
-    $('main').html(questionPageTemplate());
-    
+    $('main').html(questionPageTemplate()); 
   }
 }
 
 function startUp() {
   render();
   handleStartQuiz();
+  handleQuestionSubmit();
+
 }
 
 $(startUp);
