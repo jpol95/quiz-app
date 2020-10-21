@@ -148,7 +148,20 @@ function incorrectAnswerTemplate(){
 }
 //End Game
 //Get the Score to display correct score
-function endPageTemplate() {
+
+function endPageTemplate() {}
+
+
+function nextQuestionButton(){
+  $('main').on('click', '#next', function(e){
+    e.preventDefault()
+    store.questionNumber++
+    render()
+  })
+}
+
+function results() {
+
   let templateHTML = 
   `<div class = "container">  
   <h1 id="question"> Your Results!</h2>
@@ -225,7 +238,11 @@ function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
+
+  nextQuestionButton()
+
+
 }
 
-
+$(startUp())
   }
