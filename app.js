@@ -162,11 +162,11 @@ function results() {
   `<div class = "container">  
   <h1 id="question"> Your Results!</h2>
   <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
-  <button id="try again"> Try Again? </button>
+  <button id="again"> Try Again? </button>
     </div>`;
     
   $('main').html(templateHTML);
-  $('#again').on('click', function() {
+  $('main').on('click', '#again', function() {
     store.quizStarted = false;
     store.questionNumber = 0;
     store.score = 0;
