@@ -181,8 +181,15 @@ function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
+}
+
+})
 
 }
+
+  
+
+
 
 $(startUp);
 
