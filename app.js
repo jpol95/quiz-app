@@ -91,12 +91,12 @@ const store = {
 
 function questionPageTemplate(){
   let currentQuestion = store.questions[store.questionNumber];
-  let display = `<form class="question"> <h2> ${currentQuestion.question}<br>` 
+  let display = `<div class="container"><form class="question"> <h2> ${currentQuestion.question}<br>` 
   for (let i = 0; i < 4; i++){
     display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
     };
-  display += `<button type="submit"> Submit</button></form>`;
+  display += `<button type="submit"> Submit</button></form></div>`;
   return display;
 }
 
