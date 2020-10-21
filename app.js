@@ -49,9 +49,17 @@ const store = {
 
 // These functions return HTML templates
 
-// questionPage{
-//   string=fomat with stuff from arrayindex[currentquestion] plugged in
-//   will use the for loop that terra showed us in class to fill in questions
+function questionPage(){
+let currentQuestion = store.questions[store.questionNumber]
+let display = `<form class="question"> <h2> ${currentQuestion.question}<br>` 
+for (let i = 0; i < 4; i++){
+display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
+<label for="n${i}">${currentQuestion.answers[i]}</label><br>`
+}
+display += `<button type="submit"> Submit</button></form>`
+submitAnswer()
+render(display)
+}
 //   renderPage(string)
   
 // }
@@ -60,18 +68,20 @@ const store = {
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 
-// render(string)
-//main.html(string)
-
+ function render(string){
+ $('.container').html(string)
+ }
 
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
 
-// submitAnswer{
-//   questionNumber ++
-//   if (right)
-//   render CorrectAnswerPage()
-//   else 
-//   render WrongAnswerPage()
-// }
+function submitAnswer(){
+  $('main').on('submit', '.question', function(e){
+    e.preventDefault()
+    let currentQuestion = store.questions[store.questionNumber]
+    if ($("input[name='answer']:checked").val() === currentQuestion.correctAnswer) console.log("CORRECT!")
+    else console.log("WRONG!")
+})}
+
+$(questionPage())
