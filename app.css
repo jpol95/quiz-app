@@ -13,6 +13,9 @@ h1{
   font-size: 40px;
   font-family: 'Krona', sans-serif;
 }
+h2 {
+  font-size: 25px;
+}
 .container{
  font-family: 'Krona One', sans-serif;
  top: 100px;
@@ -48,8 +51,15 @@ h1{
  max-width: 50%;
  max-height: 50%;
 }
-
-
+ #start, #next, .submit, #again{
+   align-content: flex-end;
+   box-shadow: 5px 5px #fff000;
+   font-size: 20px;
+ }
+.question{
+ text-align: left;
+ font-size:22px;
+}
 
 @media all and (min-width: 800px) {
  h1{
@@ -92,13 +102,13 @@ h1{
    justify-self: flex-start;
  }
  
- #start, .next, .submit{
+ /* #start, .next, .submit{
    align-content: flex-end;
    box-shadow: 5px 5px #fff000;
    font-size: 20px;
- }
+ } */
 
- #next{
+ /* #next{
   align-content: flex-end;
   box-shadow: 5px 5px #fff000;
   font-size: 20px;
@@ -108,8 +118,9 @@ h1{
   align-content: flex-end;
   box-shadow: 5px 5px #fff000;
   font-size: 20px;
- }
+ } */
 
-.question{
+/* .question{
  text-align: left;
+} */
 }

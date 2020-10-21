@@ -4,8 +4,7 @@
 const store = {
   // 5 or more questions are required
   questions: [
-    { id: cuid(),
-      question: 'What is the capitol of Mississippi?',
+    { question: 'What is the capitol of Mississippi?',
       answers: [
         'Jackson',
         'Laurel',
@@ -13,24 +12,21 @@ const store = {
         'Hattiesburg',
       ],
 
-      correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg', gotCorrect: null
+      correctAnswer: 'Jackson' , gotCorrect: null
     },
 
-    { id: cuid(),
-      question: 'What state is nicknamed the Pelican State?',
-      
+    { question: 'What state is nicknamed the Pelican State?',
       answers: [
         'Arkansas',
         'Mississippi',
         'Louisiana',
         'Oklahoma'
       ],
-      correctAnswer: 'Louisiana',background: './photos/pelican.jpg', gotCorrect: null
+      correctAnswer: 'Louisiana', gotCorrect: null
 
     },
 
-    { id: cuid(),
-      question: 'Which ocean is off of the California coast?',
+    { question: 'Which ocean is off of the California coast?',
       answers: [
         'Arctic',
         'Indian',
@@ -38,27 +34,22 @@ const store = {
         'Atlantic',
       ],
       correctAnswer: 'Pacific',
-
-      background: './photos/california-coast.jpg', 
       gotCorrect: null
 
     },
 
-    { id: cuid(),
-      question: 'Which mountain range stretches from west Virginia to Georgia',
+    { question: 'Which mountain range stretches from west Virginia to Georgia',
       answers: [
         'Jackson',
-        'Smoky mountains',
+        'Smoky Mountains',
         'Blue Ridge Mountains',
         'Hattiesburg',
       ],
 
-      correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg', gotCorrect: null
-
+      correctAnswer: 'Blue Ridge Mountains', gotCorrect: null
     },
 
-    { id: cuid(),
-      question: 'What is the largest state in America?',
+    { question: 'What is the largest state in America?',
       answers: [
         'Alaska',
         'Texas',
@@ -66,12 +57,10 @@ const store = {
         'Montana',
       ],
 
-      correctAnswer: 'Alaska' ,background: './photos/alaska.jpg', gotCorrect: null
+      correctAnswer: 'Alaska', gotCorrect: null
 
     },
   ],
-  
-
   quizStarted: false,
   questionNumber: 0,
   score: 0,
@@ -119,7 +108,7 @@ function startPageTemplate() {
 function questionPageTemplate(){
   let currentQuestion = store.questions[store.questionNumber];
   let currentQNumber = store.questionNumber + 1
-  let display = `<div class="container"><form class="question"> <h2>${currentQNumber}. ${currentQuestion.question}<br><br>` 
+  let display = `<div class="container"><form class="question"> <h2>${currentQNumber}. ${currentQuestion.question}</h2><br>` 
   for (let i = 0; i < 4; i++){
     display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}" required>
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
@@ -135,25 +124,27 @@ function correctAnswerTemplate(){
   <h3>Score:${store.score}</h3>
   <button id= "next">Next</button>
   </div>`;
-  //store.currentQuestion++;
   
 }
 
 function incorrectAnswerTemplate(){
   return `<div class= "container">
   <h2>Incorrect!</h2>
-  <h3>Correct answer is:${store.questions[store.questionNumber].correctAnswer}</h3>
+  <h3>Correct answer is: ${store.questions[store.questionNumber].correctAnswer}</h3>
   <h3>Score:${store.score}</h3>
   <button id= "next">Next</button>
   </div>`;
 }
-//End Game
-//Get the Score to display correct score
 
-function endPageTemplate() {}
+function endPageTemplate() {
+  return `<div class = "container">  
+  <h2 id="question"> Your Results!</h2>
+  <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
+  <button id="again"> Try Again? </button>
+    </div>`;
+}
 
-
-function nextQuestionButton(){
+function handleNextQuestion(){
   $('main').on('click', '#next', function(e){
     e.preventDefault()
     store.questionNumber++
@@ -161,32 +152,17 @@ function nextQuestionButton(){
   })
 }
 
-function results() {
-
+function handleTryAgain() {
   $('main').on('click', '#again', function() {
     store.quizStarted = false;
     store.questionNumber = 0;
     store.score = 0;
-
     for(let question of store.questions){
       question.gotCorrect = null;
     }
     render()
   });
-
   }
-
-  function resultsTemplate(){
-    
-    return `<div class = "container">  
-  <h1 id="question"> Your Results!</h2>
-  <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
-  <button id="again"> Try Again? </button>
-    </div>`;
-  }
-//Display the background image
-//inpage template
-
 
 function handleStartQuiz() {
 //add event listener to parent element and reference child that will be clicked
@@ -198,7 +174,6 @@ function handleStartQuiz() {
     store.quizStarted = true;
     render();
   })
-
 }
 
 function handleQuestionSubmit(){
@@ -214,12 +189,13 @@ function handleQuestionSubmit(){
     };
     render()
   });
-
   }
 
 function render() {
   //if else statement to check if the quiz has started
-  if (store.questionNumber > 4) return $('main').html(resultsTemplate())
+  if (store.questionNumber > 4) {
+    return  $('main').html(endPageTemplate());
+  }
   if(store.quizStarted === false) {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
@@ -231,20 +207,14 @@ function render() {
         $('main').html(incorrectAnswerTemplate());
       }
     }
-    if(store.questionNumber == 5) {
-      $('main').html(endPageTemplate());
-    }
   }
   
-
 function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
-  results();
-
-  nextQuestionButton()
-
+  handleNextQuestion();
+  handleTryAgain();
 
 }
 
