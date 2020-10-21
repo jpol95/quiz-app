@@ -176,6 +176,8 @@ function results() {
     store.score = 0;
     render()
   });
+
+  }
 //Display the background image
 //inpage template
 
@@ -240,4 +242,4 @@ function startUp() {
 }
 
 $(startUp())
-  }
+  
