@@ -180,8 +180,15 @@ function render() {
   } else if (store.quizStarted === true) {
     console.log('Quiz has started');
     $('main').html(questionPageTemplate()); 
+    
+    if(store.questions[store.questionNumber].correctAnswer.gotCorrect === true) {
+        $('main').html(correctAnswerTemplate());
+      } else {
+        $('main').html(wrongAnswerTemplate());
+      }
+    }
   }
-}
+  
 
 function startUp() {
   render();
