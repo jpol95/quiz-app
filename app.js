@@ -49,10 +49,29 @@ const store = {
 
 // These functions return HTML templates
 
+// questionPage{
+//   string=fomat with stuff from arrayindex[currentquestion] plugged in
+//   will use the for loop that terra showed us in class to fill in questions
+//   renderPage(string)
+  
+// }
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
 
+// render(string)
+//main.html(string)
+
+
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+// submitAnswer{
+//   questionNumber ++
+//   if (right)
+//   render CorrectAnswerPage()
+//   else 
+//   render WrongAnswerPage()
+// }
