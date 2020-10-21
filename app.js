@@ -49,14 +49,34 @@ const store = {
 
 // These functions return HTML templates
 
+function questionPage(){
+let currentQuestion = store.questions[store.questionNumber]
+let display = `<form class="question"> <h2> ${currentQuestion.question}<br>` 
+for (let i = 0; i < 4; i++){
+display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
+<label for="n${i}">${currentQuestion.answers[i]}</label><br>`
+}
+display += `<button type="submit"> Submit</button></form>`
+submitAnswer()
+render(display)
+}
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
-
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
 
+
+function submitAnswer(){
+  $('main').on('submit', '.question', function(e){
+    e.preventDefault()
+    let currentQuestion = store.questions[store.questionNumber]
+    if ($("input[name='answer']:checked").val() === currentQuestion.correctAnswer) console.log("CORRECT!")
+    else console.log("WRONG!")
+
+$(questionPage())
 function startPageTemplate() {
   // define variable to hold wireframe start page html
   // return that variable
