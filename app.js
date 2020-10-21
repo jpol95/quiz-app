@@ -12,7 +12,8 @@ const store = {
         'Biloxi',
         'Hattiesburg',
       ],
-      correctAnswer: 'Jackson',
+
+      correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -24,7 +25,8 @@ const store = {
         'Louisiana',
         'Oklahoma'
       ],
-      correctAnswer: 'Louisiana',
+      correctAnswer: 'Louisiana',background: './photos/pelican.jpg', gotCorrect: null
+
     },
 
     { id: cuid(),
@@ -36,6 +38,10 @@ const store = {
         'Atlantic',
       ],
       correctAnswer: 'Pacific',
+
+      background: './photos/california-coast.jpg', 
+      gotCorrect: null
+
     },
 
     { id: cuid(),
@@ -46,7 +52,9 @@ const store = {
         'Blue Ridge Mountains',
         'Hattiesburg',
       ],
-      correctAnswer: 'Blue Ridge Mountains' , 
+
+      correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg', gotCorrect: null
+
     },
 
     { id: cuid(),
@@ -57,7 +65,9 @@ const store = {
         'California',
         'Montana',
       ],
-      correctAnswer: 'Alaska' ,
+
+      correctAnswer: 'Alaska' ,background: './photos/alaska.jpg', gotCorrect: null
+
     },
   ],
   
@@ -98,6 +108,7 @@ function questionPageTemplate(){
   display += `<button type="submit"> Submit</button></form></div>`;
   return display;
 }
+
 
 /********** RENDER FUNCTION(S) **********/
 
@@ -163,6 +174,7 @@ function handleQuestionSubmit(){
       incorrectAnswer();
       currentQuestion.gotCorrect = false;
     };
+    render()
   });
 
   }
@@ -192,6 +204,7 @@ function handleStartQuiz() {
 
 }
 
+
 function render() {
   //if else statement to check if the quiz has started
   if(store.quizStarted === false) {
@@ -199,9 +212,18 @@ function render() {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
     console.log('Quiz has started');
-    $('main').html(questionPageTemplate()); 
+     
+    
+    if(store.questions[store.questionNumber].gotCorrect === null) {
+        $('main').html(questionPageTemplate());
+      } else if((store.questions[store.questionNumber].gotCorrect === true)) {
+        $('main').html(correctAnswerTemplate());
+      } else {
+        $('main').html(wrongAnswerTemplate());
+      }
+    }
   }
-}
+  
 
 function startUp() {
   render();
