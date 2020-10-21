@@ -150,6 +150,9 @@ function incorrectAnswerTemplate(){
 //End Game
 //Get the Score to display correct score
 
+function endPageTemplate() {}
+
+
 function nextQuestionButton(){
   $('main').on('click', '#next', function(e){
     e.preventDefault()
@@ -159,23 +162,31 @@ function nextQuestionButton(){
 }
 
 function results() {
-  let templateHTML = 
-  `<div class = "container">  
-  <h1 id="question"> Your Results!</h2>
-  <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
-  <button id="again"> Try Again? </button>
-    </div>`;
-    
-  $('main').html(templateHTML);
+
   $('main').on('click', '#again', function() {
     store.quizStarted = false;
     store.questionNumber = 0;
     store.score = 0;
+
+    for(let question of store.questions){
+      question.gotCorrect = null;
+    }
     render()
   });
-//Display the background image
 
-}
+  }
+
+  function resultsTemplate(){
+    
+    return `<div class = "container">  
+  <h1 id="question"> Your Results!</h2>
+  <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
+  <button id="again"> Try Again? </button>
+    </div>`;
+  }
+//Display the background image
+//inpage template
+
 
 function handleStartQuiz() {
 //add event listener to parent element and reference child that will be clicked
@@ -208,7 +219,7 @@ function handleQuestionSubmit(){
 
 function render() {
   //if else statement to check if the quiz has started
-  if (store.questionNumber > 4) return $('main').html(results())
+  if (store.questionNumber > 4) return $('main').html(resultsTemplate())
   if(store.quizStarted === false) {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
@@ -230,9 +241,12 @@ function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
+  results();
+
   nextQuestionButton()
 
 
 }
 
 $(startUp())
+  
