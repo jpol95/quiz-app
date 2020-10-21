@@ -91,12 +91,12 @@ const store = {
 
 function questionPageTemplate(){
   let currentQuestion = store.questions[store.questionNumber];
-  let display = `<form class="question"> <h2> ${currentQuestion.question}<br>` 
+  let display = `<div class="container"><form class="question"> <h2> ${currentQuestion.question}<br>` 
   for (let i = 0; i < 4; i++){
     display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
     };
-  display += `<button type="submit"> Submit</button></form>`;
+  display += `<button type="submit"> Submit</button></form></div>`;
   return display;
 }
 
@@ -128,13 +128,12 @@ function results() {
   });
 //Display the background image
 
-
-
 }
 
 
 function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
+
     e.preventDefault();
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
@@ -149,6 +148,7 @@ function handleQuestionSubmit(){
 
   }
 
+
 function startPageTemplate() {
   // define variable to hold wireframe start page html
   // return that variable
@@ -157,7 +157,7 @@ function startPageTemplate() {
     <button id="start">New Quiz</button>
   </div>`;
   return startPage;
-};
+}
 
 function handleStartQuiz() {
 //add event listener to parent element and reference child that will be clicked
@@ -188,8 +188,9 @@ function startUp() {
   handleStartQuiz();
   handleQuestionSubmit();
 
+
 }
 
-$(startUp);
-
+$(startUp())
+  
 
