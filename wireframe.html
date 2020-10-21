@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
+  <title>html wireframes</title>
+  
+  
+</head>
+
+<body>
+
+  <main>
+  <!--- Start Page --->
+  <!--use section here instead of div label = "Beginning of Quiz"-->
+   <div class ="container">
+    <h2 class= "title">US Geography Quiz</h2>
+    <img class = "image" src ="#" alt="Opening picture">
+    <button id="start">New Quiz</button>
+  </div>
+ 
+
+  <!-- Question Page -->
+  <!--section here instead of div, label = "quiz question"-->
+ <div class = "container">
+   <h2>What's the capital of Mississippi?</h2>
+   <!--input image here-->
+   <form class = "answer-form">
+     <!--show options for answers-->
+      <input type="radio" id="a">
+      <label for="a">Jacksonville</label><br>
+      <input type="radio" id="b">
+      <label for="b">Jacksonville</label><br>
+      <input type="radio" id="c">
+      <label for="c">Jacksonville</label><br>
+      <input type="radio" id="d">
+      <label for="d">Jacksonville</label><br>
+      <!--next button here-->
+   </form>
+  </div>
+
+
+ <!--Right Page-->
+ <!--section here, label = "correct answer"-->
+ <div class= "container">
+  <h2>Correct!</h2>
+  <img class = "image" src = "#" alt = "star">
+  <h3>Score:</h3>
+  <ul>
+      <li>Right : 0</li>
+      <li>Wrong : 0</li>
+  </ul>
+  <button id= "next">Next</button>
+</div>
+
+<!--Wrong Page-->
+
+<!--section here, label = "wrong answer"-->
+<div class= "container">
+  <h2>Incorrect!</h2>
+  <img class = "image" src = "#" alt = "thumb down">
+  <h3>Right Answer:</h3>
+  <p>the right answer is...</p>
+  <h4>Score:</h4>
+  <ul>
+      <li>Right : 0</li>
+      <li>Wrong : 0</li>
+  </ul>
+  <button id= "next">Next</button>
+</div>
+
+
+   <!-- End Page -->
+<!--section here, label ="end of quiz"-->
+<div class = "container">
+  <h2>End of Game</h2>
+  <h3>Final Score</h3>
+  <button id="new game">New Game</button>
+
+</div>
+
+</main>
+<script></script>
+</body>
+</html>
