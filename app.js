@@ -133,7 +133,7 @@ function correctAnswer(){
   return `<div class= "container">
   <h2>Correct!</h2>
   <h3>${store.questions[store.questionNumber].correctAnswer}<h3>
-  <h3>Score:${store.score}</h3>
+  <h3>Score:<br>${store.score}</h3>
   <button id= "next">Next</button>
   </div>`,
   store.currentQuestion++;
@@ -144,7 +144,7 @@ function incorrectAnswer(){
   return `<div class= "container">
   <h2>Incorrect!</h2>
   <h3>Correct answer is:${store.questions[store.questionNumber].correctAnswer}</h3>
-  <h3>Score:${store.score}</h3>
+  <h3>Score:<br>${store.score}</h3>
   <button id= "next">Next</button>
   </div>`,
   store.currentQuestion++;
