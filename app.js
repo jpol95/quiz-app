@@ -12,7 +12,7 @@ const store = {
         'Biloxi',
         'Hattiesburg',
       ],
-      correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg',
+      correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -24,7 +24,7 @@ const store = {
         'Louisiana',
         'Oklahoma'
       ],
-      correctAnswer: 'Louisiana',background: './photos/pelican.jpg',
+      correctAnswer: 'Louisiana',background: './photos/pelican.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -35,7 +35,7 @@ const store = {
         'Pacific',
         'Atlantic',
       ],
-      correctAnswer: 'Pacific',background: './photos/california-coast.jpg'
+      correctAnswer: 'Pacific',background: './photos/california-coast.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -46,7 +46,7 @@ const store = {
         'Blue Ridge Mountains',
         'Hattiesburg',
       ],
-      correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg'
+      correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -57,7 +57,7 @@ const store = {
         'California',
         'Montana',
       ],
-      correctAnswer: 'Alaska' ,background: './photos/alaska.jpg'
+      correctAnswer: 'Alaska' ,background: './photos/alaska.jpg', gotCorrect: null
     },
   ],
   
@@ -91,14 +91,15 @@ const store = {
 
 function questionPageTemplate(){
   let currentQuestion = store.questions[store.questionNumber];
-  let display = `<form class="question"> <h2> ${currentQuestion.question}<br>` 
+  let display = `<div class="container"><form class="question"> <h2> ${currentQuestion.question}<br>` 
   for (let i = 0; i < 4; i++){
     display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
     };
-  display += `<button type="submit"> Submit</button></form>`;
+  display += `<button type="submit"> Submit</button></form></div>`;
   return display;
 }
+
 
 /********** RENDER FUNCTION(S) **********/
 
@@ -135,42 +136,35 @@ $('main').on('click', '#again', function() {
 //inpage template
 
 
-$('main').html(templateHTML);
-$('#again').on('click', function() {
-  store.quizStarted = false;
-  store.questionNumber = 0;
-  store.score = 0;
-  loadQuestion(store);
-
-
-
 
 function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
+
     e.preventDefault();
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
-       console.log("CORRECT!");
-         store.questionNumber++;
-        render();
+       currentQuestion.gotCorrect = true;
+
     } else {
-      console.log("WRONG!")
+      currentQuestion.gotCorrect = false
     };
+    store.questionNumber++
+    render()
   });
 
   }
+
 
 function startPageTemplate() {
   // define variable to hold wireframe start page html
   // return that variable
   let startPage = `  <div class ="container">
-    <h2>US Geography Quiz</h2>
-    <img class = "image" src ="#" alt="Opening picture">
+    <h2 id="title">US Geography Quiz</h2>
     <button id="start">New Quiz</button>
   </div>`;
   return startPage;
-};
+}
 
 function handleStartQuiz() {
 //add event listener to parent element and reference child that will be clicked
@@ -193,13 +187,21 @@ function render() {
   } else if (store.quizStarted === true) {
     console.log('Quiz has started');
     $('main').html(questionPageTemplate()); 
+    
+    if(store.questions[store.questionNumber].correctAnswer.gotCorrect === true) {
+        $('main').html(correctAnswerTemplate());
+      } else {
+        $('main').html(wrongAnswerTemplate());
+      }
+    }
   }
-}
+  
 
 function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
+<<<<<<< HEAD
 }
 
 
@@ -209,5 +211,12 @@ function startUp() {
 
 
 $(startUp);
+=======
 
+
+}
+>>>>>>> 530e7fb0b4086320f29d30578677c7fcb1191581
+
+$(startUp())
+  
 
