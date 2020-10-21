@@ -168,20 +168,14 @@ function results() {
   <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
   <button id="again"> Try Again? </button>
     </div>`;
-    return templateHTML
-  };
-
-  function results() {
-$('main').on('click', '#again', function() {
-  store.quizStarted = false;
-  store.questionNumber = 0;
-  store.score = 0;
-  render();
-})
-
-
-
-  
+    
+  $('main').html(templateHTML);
+  $('#again').on('click', function() {
+    store.quizStarted = false;
+    store.questionNumber = 0;
+    store.score = 0;
+    render()
+  });
 //Display the background image
 //inpage template
 
@@ -217,6 +211,7 @@ function handleQuestionSubmit(){
 
 function render() {
   //if else statement to check if the quiz has started
+  if (store.questionNumber > 4) return $('main').html(results())
   if(store.quizStarted === false) {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
