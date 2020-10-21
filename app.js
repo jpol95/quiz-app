@@ -96,66 +96,6 @@ const store = {
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
-function startPage(){
-  let startPage = 
-  `<div class ="container">
-  <h2 class= "title">US Geography Quiz</h2>
-  <button id="start">New Quiz</button>
-  </div>`
-  return startPage;
-}
-//Cycles through questions
-function questionPage(){
-  let question = store.questions[store.question];
-  console.log(question);
 
-  let questionPage = 
-  `<div class = "container">
-  <h2>${question.question}</h2>
-  <form>
-      <label> ${question.answers[0]}</label>
-      <input type="radio" name="answer" value = ${question.answers[0]}
-      <label> ${question.answers[1]}</label>
-      <input type="radio" name="answer" value = ${question.answers[1]}
-      label> ${question.answers[2]}</label>
-      <input type="radio" name="answer" value = ${question.answers[2]}
-      label> ${question.answers[3]}</label>
-      <input type="radio" name="answer" value = ${question.answers[3]}
-      <button type="submit">Submit</button>
-  </form>    
-  </div>`
-  return questionPage;
-}
-// starts the quiz
-function handleStartQuiz(){
-  $('main').on('click', '#start', function(){
-    store.quizStarted = true;
-    render();
-  })
-}
-//submits and increments the quiz
-function handleAnswerSubmit(){
-  $('main').on('submit', 'form', function(evt){
-    evt.preventDefault();
-      store.questionNumber++;
-  })
-}
-//if answer is correct, onto next question. If answer is wrong, reveal right answer and then onto the next question
-function render(){
-  if(store.quizStarted === false){
-    $('main').html(startPage());
-  } else if (store.quizStarted){
-    $('main').html(questionPage());
-  }
-}
-// create function to move onto the next question
+//
 
-// a function to contain our functions
-function main(){
-  render();
-  handleStartQuiz();
-  handleAnswersSubmit();
-  questionPage();
-}
-
-$(main);
