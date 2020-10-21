@@ -80,7 +80,7 @@ h1{
    box-shadow: 0 4px 8px 0 black;
    background-color: #fff;
    width: 350px;
-   height: 350px;
+   height: 400px;
    padding: 10px;
    margin: auto;
    margin-top: 50px;
@@ -96,5 +96,3 @@ h1{
    box-shadow: 5px 5px #fff000;
    font-size: 20px;
  }
-
-

@@ -98,6 +98,24 @@ const store = {
 
 // These functions return HTML templates
 
+/********** RENDER FUNCTION(S) **********/
+
+// This function conditionally replaces the contents of the <main> tag based on the state of the store
+/********** EVENT HANDLER FUNCTIONS **********/
+
+// These functions handle events (submit, click, etc)
+
+
+function startPageTemplate() {
+  // define variable to hold wireframe start page html
+  // return that variable
+  let startPage = `  <div class ="container">
+    <h2 id="title">US Geography Quiz</h2>
+    <button id="start">New Quiz</button>
+  </div>`;
+  return startPage;
+}
+
 function questionPageTemplate(){
   let currentQuestion = store.questions[store.questionNumber];
   let display = `<div class="container"><form class="question"> <h2>${store.questionNumber}.<br><br>${currentQuestion.question}<br><br>` 
@@ -109,18 +127,36 @@ function questionPageTemplate(){
   return display;
 }
 
+function correctAnswerTemplate(){
+  return `<div class= "container">
+  <h2>Correct!</h2>
+  <h3>${store.questions[store.questionNumber].correctAnswer}<h3>
+  <h3>Score:${store.score}</h3>
+  <button id= "next">Next</button>
+  </div>`;
+  //store.currentQuestion++;
+  
+}
 
-/********** RENDER FUNCTION(S) **********/
-
-// This function conditionally replaces the contents of the <main> tag based on the state of the store
-/********** EVENT HANDLER FUNCTIONS **********/
-
-// These functions handle events (submit, click, etc)
-
-
-
+function incorrectAnswerTemplate(){
+  return `<div class= "container">
+  <h2>Incorrect!</h2>
+  <h3>Correct answer is:${store.questions[store.questionNumber].correctAnswer}</h3>
+  <h3>Score:${store.score}</h3>
+  <button id= "next">Next</button>
+  </div>`;
+}
 //End Game
 //Get the Score to display correct score
+
+function nextQuestionButton(){
+  $('main').on('click', '#next', function(e){
+    e.preventDefault()
+    store.questionNumber++
+    render()
+  })
+}
+
 function results() {
   let templateHTML = 
   `<div class = "container">  
@@ -134,12 +170,13 @@ function results() {
     store.quizStarted = false;
     store.questionNumber = 0;
     store.score = 0;
-    loadQuestion(store);
+    render()
   });
 //Display the background image
 
 }
 
+<<<<<<< HEAD
 function correctAnswer(){
   return `<div class= "container">
   <h2>Correct!</h2>
@@ -159,17 +196,34 @@ function incorrectAnswer(){
   <button id= "next">Next</button>
   </div>`,
   store.currentQuestion++;
+=======
+function handleStartQuiz() {
+//add event listener to parent element and reference child that will be clicked
+// reaction function should alter store.quizStarted to true
+// render page
+  $('main').on('click', '#start', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    store.quizStarted = true;
+    render();
+  })
+
+>>>>>>> 968c02ef64f649f93edec8fb8055fb25cd32dba1
 }
 
 function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
-
     e.preventDefault();
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
+<<<<<<< HEAD
       currentQuestion.gotCorrect = true;
 
+=======
+        currentQuestion.gotCorrect = true;
+        store.score++;
+>>>>>>> 968c02ef64f649f93edec8fb8055fb25cd32dba1
     } else {
       currentQuestion.gotCorrect = false;
     };
@@ -178,6 +232,7 @@ function handleQuestionSubmit(){
 
   }
 
+<<<<<<< HEAD
 
 
 function startPageTemplate() {
@@ -208,22 +263,24 @@ function handleStartQuiz() {
 }
 
 
+=======
+>>>>>>> 968c02ef64f649f93edec8fb8055fb25cd32dba1
 function render() {
   //if else statement to check if the quiz has started
+  if (store.questionNumber > 4) return $('main').html(results())
   if(store.quizStarted === false) {
-    console.log('Quiz is ready to start');
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
-    console.log('Quiz has started');
-     
-    
     if(store.questions[store.questionNumber].gotCorrect === null) {
         $('main').html(questionPageTemplate());
       } else if((store.questions[store.questionNumber].gotCorrect === true)) {
         $('main').html(correctAnswerTemplate());
       } else {
-        $('main').html(wrongAnswerTemplate());
+        $('main').html(incorrectAnswerTemplate());
       }
+    }
+    if(store.questionNumber == 5) {
+      $('main').html(endPageTemplate());
     }
   }
   
@@ -232,11 +289,9 @@ function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
-  incorrectAnswer();
-  correctAnswer(); 
+  nextQuestionButton()
+
 
 }
 
 $(startUp())
-  
-
