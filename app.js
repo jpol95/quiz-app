@@ -129,19 +129,18 @@ function results() {
   });
 //Display the background image
 
-
-
 }
-$(questionPage)
 
-function submitAnswer(){
+
+function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
     e.preventDefault()
     let currentQuestion = store.questions[store.questionNumber]
     if ($("input[name='answer']:checked").val() === currentQuestion.correctAnswer) console.log("CORRECT!")
     else console.log("WRONG!")
+  })
+}
 
-$(questionPage())
 function startPageTemplate() {
   // define variable to hold wireframe start page html
   // return that variable
@@ -151,7 +150,7 @@ function startPageTemplate() {
     <button id="start">New Quiz</button>
   </div>`;
   return startPage;
-};
+}
 
 function handleStartQuiz() {
 //add event listener to parent element and reference child that will be clicked
@@ -182,8 +181,9 @@ function startUp() {
   handleStartQuiz();
   handleQuestionSubmit();
 
+
 }
 
-$(startUp);
-
+$(startUp())
+  
 
