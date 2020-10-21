@@ -111,26 +111,38 @@ function questionPageTemplate(){
 
 //End Game
 //Get the Score to display correct score
-function results() {
+function endPageTemplate() {
   let templateHTML = 
   `<div class = "container">  
   <h1 id="question" Your Results!</h2>
   <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
-  <button id="try again"> Try Again? </button>
+  <button id="again"> Try Again? </button>
     </div>`;
-    
-  $('main').html(templateHTML);
-  $('#again').on('click', function() {
-    store.quizStarted = false;
-    store.questionNumber = 0;
-    store.score = 0;
-    loadQuestion(store);
-  });
+    return templateHTML
+  };
+
+  function results() {
+$('main').on('click', '#again', function() {
+  store.quizStarted = false;
+  store.questionNumber = 0;
+  store.score = 0;
+  render(questionPageTemplate);
+
+  }
+
+  
 //Display the background image
+//inpage template
 
 
+$('main').html(templateHTML);
+$('#again').on('click', function() {
+  store.quizStarted = false;
+  store.questionNumber = 0;
+  store.score = 0;
+  loadQuestion(store);
 
-}
+
 
 
 function handleQuestionSubmit(){
@@ -190,9 +202,7 @@ function startUp() {
   handleQuestionSubmit();
 }
 
-})
 
-}
 
   
 
