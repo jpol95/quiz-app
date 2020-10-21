@@ -35,7 +35,9 @@ const store = {
         'Pacific',
         'Atlantic',
       ],
-      correctAnswer: 'Pacific',background: './photos/california-coast.jpg', gotCorrect: null
+      correctAnswer: 'Pacific',
+      background: './photos/california-coast.jpg', 
+      gotCorrect: null
     },
 
     { id: cuid(),
@@ -139,6 +141,7 @@ function handleQuestionSubmit(){
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
+
        currentQuestion.gotCorrect = true;
 
     } else {
@@ -174,6 +177,7 @@ function handleStartQuiz() {
 
 }
 
+
 function render() {
   //if else statement to check if the quiz has started
   if(store.quizStarted === false) {
@@ -181,9 +185,11 @@ function render() {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
     console.log('Quiz has started');
-    $('main').html(questionPageTemplate()); 
+     
     
-    if(store.questions[store.questionNumber].correctAnswer.gotCorrect === true) {
+    if(store.questions[store.questionNumber].gotCorrect === null) {
+        $('main').html(questionPageTemplate());
+      } else if((store.questions[store.questionNumber].gotCorrect === true)) {
         $('main').html(correctAnswerTemplate());
       } else {
         $('main').html(wrongAnswerTemplate());

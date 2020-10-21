@@ -67,6 +67,7 @@ function wrongAnswerTemplate() {
   </ul>
   <button id= "next">Next</button>
 </div>`
+return wrongAnswersPage;
 }
 
 function startPageTemplate() {
