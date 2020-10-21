@@ -95,7 +95,7 @@ function questionPageTemplate(){
     display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
     };
-  display += `<br><button type="submit"> Submit</button></form></div>`;
+  display += `<br><button class="submit" type="submit"> Submit</button></form></div>`;
   return display;
 }
 
@@ -172,7 +172,11 @@ function startPageTemplate() {
   // define variable to hold wireframe start page html
   // return that variable
   let startPage = `  <div class ="container">
-    <h2 id="title">US Geography Quiz</h2>
+    <h2 id="title">USA Geography Quiz</h2>
+    <br>
+    <br>
+    <br>
+    <br>
     <button id="start">New Quiz</button>
   </div>`;
   return startPage;
