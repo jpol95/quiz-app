@@ -249,4 +249,3 @@ function startUp() {
 }
 
 $(startUp())
-  

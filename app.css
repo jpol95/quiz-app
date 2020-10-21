@@ -91,15 +91,18 @@ h1{
    font-size: 40px;
    justify-self: flex-start;
  }
- #start{
+ 
+ #start, .next, .submit{
    align-content: flex-end;
    box-shadow: 5px 5px #fff000;
    font-size: 20px;
  }
+
  #next{
   align-content: flex-end;
   box-shadow: 5px 5px #fff000;
   font-size: 20px;
+
 }
 .submit{
   align-content: flex-end;
