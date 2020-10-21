@@ -4,31 +4,71 @@
 const store = {
   // 5 or more questions are required
   questions: [
-    {
-      question: 'What color is broccoli?',
+    { id: cuid(),
+      question: 'What is the capitol of Mississippi?',
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        'Jackson',
+        'Laurel',
+        'Biloxi',
+        'Hattiesburg',
       ],
-      correctAnswer: 'green'
+      correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg',
     },
-    {
-      question: 'What is the current year?',
+
+    { id: cuid(),
+      question: 'What state is nicknamed the Pelican State?',
+      
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        'Arkansas',
+        'Mississippi',
+        'Louisiana',
+        'Oklahoma'
       ],
-      correctAnswer: '2019'
-    }
+      correctAnswer: 'Louisiana',background: './photos/pelican.jpg',
+    },
+
+    { id: cuid(),
+      question: 'Which ocean is off of the California coast?',
+      answers: [
+        'Arctic',
+        'Indian',
+        'Pacific',
+        'Atlantic',
+      ],
+      correctAnswer: 'Atlantic',background: './photos/california-coast.jpg'
+    },
+
+    { id: cuid(),
+      question: 'Which mountain range stretches from west Virginia to Georgia',
+      answers: [
+        'Jackson',
+        'Smoky mountains',
+        'Blue Ridge Mountains',
+        'Hattiesburg',
+      ],
+      correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg'
+    },
+
+    { id: cuid(),
+      question: 'What is the largest state in America?',
+      answers: [
+        'Alaska',
+        'Texas',
+        'California',
+        'Montana',
+      ],
+      correctAnswer: 'Alaska' ,background: './photos/alaska.jpg'
+    },
   ],
+  
+
   quizStarted: false,
   questionNumber: 0,
-  score: 0
-};
+  score: 0,
+  wrong: 0,
+  correct: './photos/star.jpg',
+  incorrect: './thumbdown.jpg',
+}
 
 /**
  * 
@@ -67,7 +107,6 @@ render(display)
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
-
 
 function submitAnswer(){
   $('main').on('submit', '.question', function(e){
@@ -120,3 +159,4 @@ function startUp() {
 }
 
 $(startUp);
+
