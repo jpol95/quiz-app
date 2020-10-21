@@ -171,7 +171,7 @@ function results() {
     store.quizStarted = false;
     store.questionNumber = 0;
     store.score = 0;
-    loadQuestion(store);
+    render()
   });
 //Display the background image
 
@@ -213,6 +213,7 @@ function handleStartQuiz() {
 
 function render() {
   //if else statement to check if the quiz has started
+  if (store.questionNumber > 4) return $('main').html(results())
   if(store.quizStarted === false) {
     console.log('Quiz is ready to start');
     $('main').html(startPageTemplate());
