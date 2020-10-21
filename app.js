@@ -121,7 +121,7 @@ function questionPageTemplate(){
   let currentQNumber = store.questionNumber + 1
   let display = `<div class="container"><form class="question"> <h2>${currentQNumber}. ${currentQuestion.question}<br><br>` 
   for (let i = 0; i < 4; i++){
-    display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
+    display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}" required>
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
     };
   display += `<button type="submit"> Submit</button></form></div>`;
