@@ -3,22 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
   <title>html wireframes</title>
+  
+  
 </head>
+
 <body>
 
+  <main>
   <!--- Start Page --->
-  <div class ="container">
-    <h2>US Geography Quiz</h2>
+  <!--use section here instead of div label = "Beginning of Quiz"-->
+   <div class ="container">
+    <h2 class= "title">US Geography Quiz</h2>
     <img class = "image" src ="#" alt="Opening picture">
     <button id="start">New Quiz</button>
   </div>
-  <hr>
+ 
 
   <!-- Question Page -->
+  <!--section here instead of div, label = "quiz question"-->
  <div class = "container">
    <h2>What's the capital of Mississippi?</h2>
-   <form>
+   <!--input image here-->
+   <form class = "answer-form">
+     <!--show options for answers-->
       <input type="radio" id="a">
       <label for="a">Jacksonville</label><br>
       <input type="radio" id="b">
@@ -27,11 +36,17 @@
       <label for="c">Jacksonville</label><br>
       <input type="radio" id="d">
       <label for="d">Jacksonville</label><br>
+
+      <!--next button here-->
+
+      <button type="submit"> Submit</button>
+
    </form>
   </div>
 
 
  <!--Right Page-->
+ <!--section here, label = "correct answer"-->
  <div class= "container">
   <h2>Correct!</h2>
   <img class = "image" src = "#" alt = "star">
@@ -45,9 +60,9 @@
 
 <!--Wrong Page-->
 
-<hr>
+<!--section here, label = "wrong answer"-->
 <div class= "container">
-  <h2>Wrong!</h2>
+  <h2>Incorrect!</h2>
   <img class = "image" src = "#" alt = "thumb down">
   <h3>Right Answer:</h3>
   <p>the right answer is...</p>
@@ -58,9 +73,10 @@
   </ul>
   <button id= "next">Next</button>
 </div>
-<hr>
+
 
    <!-- End Page -->
+
 
 
    <hr>
@@ -73,9 +89,10 @@
 
 
 </div>
- <hr>
 
 
+</main>
+<script></script>
 
 </body>
 </html>

@@ -4,31 +4,71 @@
 const store = {
   // 5 or more questions are required
   questions: [
-    {
-      question: 'What color is broccoli?',
+    { id: cuid(),
+      question: 'What is the capitol of Mississippi?',
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        'Jackson',
+        'Laurel',
+        'Biloxi',
+        'Hattiesburg',
       ],
-      correctAnswer: 'green'
+      correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg',
     },
-    {
-      question: 'What is the current year?',
+
+    { id: cuid(),
+      question: 'What state is nicknamed the Pelican State?',
+      
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        'Arkansas',
+        'Mississippi',
+        'Louisiana',
+        'Oklahoma'
       ],
-      correctAnswer: '2019'
-    }
+      correctAnswer: 'Louisiana',background: './photos/pelican.jpg',
+    },
+
+    { id: cuid(),
+      question: 'Which ocean is off of the California coast?',
+      answers: [
+        'Arctic',
+        'Indian',
+        'Pacific',
+        'Atlantic',
+      ],
+      correctAnswer: 'Atlantic',background: './photos/california-coast.jpg'
+    },
+
+    { id: cuid(),
+      question: 'Which mountain range stretches from west Virginia to Georgia',
+      answers: [
+        'Jackson',
+        'Smoky mountains',
+        'Blue Ridge Mountains',
+        'Hattiesburg',
+      ],
+      correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg'
+    },
+
+    { id: cuid(),
+      question: 'What is the largest state in America?',
+      answers: [
+        'Alaska',
+        'Texas',
+        'California',
+        'Montana',
+      ],
+      correctAnswer: 'Alaska' ,background: './photos/alaska.jpg'
+    },
   ],
+  
+
   quizStarted: false,
   questionNumber: 0,
-  score: 0
-};
+  score: 0,
+  wrong: 0,
+  correct: './photos/star.jpg',
+  incorrect: './thumbdown.jpg',
+}
 
 /**
  * 
@@ -49,13 +89,25 @@ const store = {
 
 // These functions return HTML templates
 
+function questionPage(){
+let currentQuestion = store.questions[store.questionNumber]
+let display = `<form class="question"> <h2> ${currentQuestion.question}<br>` 
+for (let i = 0; i < 4; i++){
+display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
+<label for="n${i}">${currentQuestion.answers[i]}</label><br>`
+}
+display += `<button type="submit"> Submit</button></form>`
+submitAnswer()
+render(display)
+}
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
-
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
 
 
 //End Game
@@ -81,3 +133,57 @@ function results() {
 
 }
 $(questionPage)
+
+function submitAnswer(){
+  $('main').on('submit', '.question', function(e){
+    e.preventDefault()
+    let currentQuestion = store.questions[store.questionNumber]
+    if ($("input[name='answer']:checked").val() === currentQuestion.correctAnswer) console.log("CORRECT!")
+    else console.log("WRONG!")
+
+$(questionPage())
+function startPageTemplate() {
+  // define variable to hold wireframe start page html
+  // return that variable
+  let startPage = `  <div class ="container">
+    <h2>US Geography Quiz</h2>
+    <img class = "image" src ="#" alt="Opening picture">
+    <button id="start">New Quiz</button>
+  </div>`;
+  return startPage;
+};
+
+function handleStartQuiz() {
+//add event listener to parent element and reference child that will be clicked
+// reaction function should alter store.quizStarted to true
+// render page
+  $('main').on('click', '#start', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    store.quizStarted = true;
+    render();
+  })
+
+}
+
+function render() {
+  //if else statement to check if the quiz has started
+  if(store.quizStarted === false) {
+    console.log('Quiz is ready to start');
+    $('main').html(startPageTemplate());
+  } else if (store.quizStarted === true) {
+    console.log('Quiz has started');
+    $('main').html(questionPageTemplate()); 
+  }
+}
+
+function startUp() {
+  render();
+  handleStartQuiz();
+  handleQuestionSubmit();
+
+}
+
+$(startUp);
+
+
