@@ -60,21 +60,14 @@ display += `<button type="submit"> Submit</button></form>`
 submitAnswer()
 render(display)
 }
-//   renderPage(string)
-  
-// }
 
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
-
- function render(string){
- $('.container').html(string)
- }
-
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
 
 function submitAnswer(){
   $('main').on('submit', '.question', function(e){
@@ -82,6 +75,48 @@ function submitAnswer(){
     let currentQuestion = store.questions[store.questionNumber]
     if ($("input[name='answer']:checked").val() === currentQuestion.correctAnswer) console.log("CORRECT!")
     else console.log("WRONG!")
-})}
 
 $(questionPage())
+function startPageTemplate() {
+  // define variable to hold wireframe start page html
+  // return that variable
+  let startPage = `  <div class ="container">
+    <h2>US Geography Quiz</h2>
+    <img class = "image" src ="#" alt="Opening picture">
+    <button id="start">New Quiz</button>
+  </div>`;
+  return startPage;
+};
+
+function handleStartQuiz() {
+//add event listener to parent element and reference child that will be clicked
+// reaction function should alter store.quizStarted to true
+// render page
+  $('main').on('click', '#start', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    store.quizStarted = true;
+    render();
+  })
+
+}
+
+function render() {
+  //if else statement to check if the quiz has started
+  if(store.quizStarted === false) {
+    console.log('Quiz is ready to start');
+    $('main').html(startPageTemplate());
+  } else if (store.quizStarted === true) {
+    console.log('Quiz has started');
+    $('main').html(questionPageTemplate()); 
+  }
+}
+
+function startUp() {
+  render();
+  handleStartQuiz();
+  handleQuestionSubmit();
+
+}
+
+$(startUp);
