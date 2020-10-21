@@ -12,6 +12,7 @@ const store = {
         'Biloxi',
         'Hattiesburg',
       ],
+
       correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg', gotCorrect: null
     },
 
@@ -25,6 +26,7 @@ const store = {
         'Oklahoma'
       ],
       correctAnswer: 'Louisiana',background: './photos/pelican.jpg', gotCorrect: null
+
     },
 
     { id: cuid(),
@@ -36,8 +38,10 @@ const store = {
         'Atlantic',
       ],
       correctAnswer: 'Pacific',
+
       background: './photos/california-coast.jpg', 
       gotCorrect: null
+
     },
 
     { id: cuid(),
@@ -48,7 +52,9 @@ const store = {
         'Blue Ridge Mountains',
         'Hattiesburg',
       ],
+
       correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg', gotCorrect: null
+
     },
 
     { id: cuid(),
@@ -59,7 +65,9 @@ const store = {
         'California',
         'Montana',
       ],
+
       correctAnswer: 'Alaska' ,background: './photos/alaska.jpg', gotCorrect: null
+
     },
   ],
   
@@ -68,8 +76,7 @@ const store = {
   questionNumber: 0,
   score: 0,
   wrong: 0,
-  correct: './photos/star.jpg',
-  incorrect: './thumbdown.jpg',
+  
 }
 
 /**
@@ -93,7 +100,7 @@ const store = {
 
 function questionPageTemplate(){
   let currentQuestion = store.questions[store.questionNumber];
-  let display = `<div class="container"><form class="question"> <h2> ${currentQuestion.question}<br>` 
+  let display = `<div class="container"><form class="question"> <h2> ${currentQuestion.question}<br><br>` 
   for (let i = 0; i < 4; i++){
     display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
       <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
@@ -117,7 +124,7 @@ function questionPageTemplate(){
 function results() {
   let templateHTML = 
   `<div class = "container">  
-  <h1 id="question" Your Results!</h2>
+  <h1 id="question"> Your Results!</h2>
   <h3> Congrats! You scored  <br> ${store.score} / 5! </h3>
   <button id="try again"> Try Again? </button>
     </div>`;
@@ -133,6 +140,26 @@ function results() {
 
 }
 
+function correctAnswer(){
+  return `<div class= "container">
+  <h2>Correct!</h2>
+  <h3>${store.questions[store.questionNumber].correctAnswer}<h3>
+  <h3>Score:${store.score}</h3>
+  <button id= "next">Next</button>
+  </div>`,
+  store.currentQuestion++;
+  
+}
+
+function incorrectAnswer(){
+  return `<div class= "container">
+  <h2>Incorrect!</h2>
+  <h3>Correct answer is:${store.questions[store.questionNumber].correctAnswer}</h3>
+  <h3>Score:${store.score}</h3>
+  <button id= "next">Next</button>
+  </div>`,
+  store.currentQuestion++;
+}
 
 function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
@@ -141,17 +168,17 @@ function handleQuestionSubmit(){
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
-
        currentQuestion.gotCorrect = true;
 
     } else {
-      currentQuestion.gotCorrect = false
+      incorrectAnswer();
+      currentQuestion.gotCorrect = false;
     };
-    store.questionNumber++
     render()
   });
 
   }
+
 
 
 function startPageTemplate() {
@@ -202,7 +229,8 @@ function startUp() {
   render();
   handleStartQuiz();
   handleQuestionSubmit();
-
+  incorrectAnswer();
+  correctAnswer(); 
 
 }
 
