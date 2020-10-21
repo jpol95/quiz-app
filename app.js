@@ -157,10 +157,9 @@ function handleQuestionSubmit(){
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
-       currentQuestion.gotCorrect = true;
+      currentQuestion.gotCorrect = true;
 
     } else {
-      incorrectAnswer();
       currentQuestion.gotCorrect = false;
     };
   });
