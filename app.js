@@ -12,7 +12,7 @@ const store = {
         'Biloxi',
         'Hattiesburg',
       ],
-      correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg',
+      correctAnswer: 'Jackson' ,background: './photos/mississippi.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -24,7 +24,7 @@ const store = {
         'Louisiana',
         'Oklahoma'
       ],
-      correctAnswer: 'Louisiana',background: './photos/pelican.jpg',
+      correctAnswer: 'Louisiana',background: './photos/pelican.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -35,7 +35,7 @@ const store = {
         'Pacific',
         'Atlantic',
       ],
-      correctAnswer: 'Pacific',background: './photos/california-coast.jpg'
+      correctAnswer: 'Pacific',background: './photos/california-coast.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -46,7 +46,7 @@ const store = {
         'Blue Ridge Mountains',
         'Hattiesburg',
       ],
-      correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg'
+      correctAnswer: 'Blue Ridge Mountains' , background: './photos/blue-ridge-mountain.jpg', gotCorrect: null
     },
 
     { id: cuid(),
@@ -57,7 +57,7 @@ const store = {
         'California',
         'Montana',
       ],
-      correctAnswer: 'Alaska' ,background: './photos/alaska.jpg'
+      correctAnswer: 'Alaska' ,background: './photos/alaska.jpg', gotCorrect: null
     },
   ],
   
@@ -100,6 +100,7 @@ function questionPageTemplate(){
   return display;
 }
 
+
 /********** RENDER FUNCTION(S) **********/
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
@@ -138,12 +139,13 @@ function handleQuestionSubmit(){
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
-       console.log("CORRECT!");
-         store.questionNumber++;
-        render();
+       currentQuestion.gotCorrect = true;
+
     } else {
-      console.log("WRONG!")
+      currentQuestion.gotCorrect = false
     };
+    store.questionNumber++
+    render()
   });
 
   }
