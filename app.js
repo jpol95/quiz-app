@@ -151,7 +151,6 @@ function incorrectAnswerTemplate(){
 
 function nextQuestionButton(){
   $('main').on('click', '#next', function(e){
-    console.log("Hello")
     e.preventDefault()
     store.questionNumber++
     render()
@@ -177,6 +176,18 @@ function results() {
 
 }
 
+function handleStartQuiz() {
+//add event listener to parent element and reference child that will be clicked
+// reaction function should alter store.quizStarted to true
+// render page
+  $('main').on('click', '#start', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    store.quizStarted = true;
+    render();
+  })
+
+}
 
 function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
@@ -194,32 +205,11 @@ function handleQuestionSubmit(){
 
   }
 
-
-
-
-function handleStartQuiz() {
-//add event listener to parent element and reference child that will be clicked
-// reaction function should alter store.quizStarted to true
-// render page
-  $('main').on('click', '#start', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    store.quizStarted = true;
-    render();
-  })
-
-}
-
-
 function render() {
   //if else statement to check if the quiz has started
   if(store.quizStarted === false) {
-    console.log('Quiz is ready to start');
     $('main').html(startPageTemplate());
   } else if (store.quizStarted === true) {
-    console.log('Quiz has started');
-     
-    
     if(store.questions[store.questionNumber].gotCorrect === null) {
         $('main').html(questionPageTemplate());
       } else if((store.questions[store.questionNumber].gotCorrect === true)) {
@@ -227,6 +217,9 @@ function render() {
       } else {
         $('main').html(incorrectAnswerTemplate());
       }
+    }
+    if(store.questionNumber == 5) {
+      $('main').html(endPageTemplate());
     }
   }
   
