@@ -35,7 +35,7 @@ const store = {
         'Pacific',
         'Atlantic',
       ],
-      correctAnswer: 'Atlantic',background: './photos/california-coast.jpg'
+      correctAnswer: 'Pacific',background: './photos/california-coast.jpg'
     },
 
     { id: cuid(),
@@ -139,13 +139,14 @@ function handleQuestionSubmit(){
     let currentQuestion = store.questions[store.questionNumber];
     let answer = $("input[name='answer']:checked").val();
     if ( answer === currentQuestion.correctAnswer) {
-       console.log("CORRECT!")
+       console.log("CORRECT!");
+         store.questionNumber++;
+        render();
     } else {
       console.log("WRONG!")
     };
   });
-  store.questionNumber++;
-  render();
+
   }
 
 function startPageTemplate() {
