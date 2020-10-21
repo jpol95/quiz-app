@@ -170,7 +170,7 @@ function results() {
     </div>`;
     
   $('main').html(templateHTML);
-  $('#again').on('click', function() {
+  $('main').on('click', '#again', function() {
     store.quizStarted = false;
     store.questionNumber = 0;
     store.score = 0;
