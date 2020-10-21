@@ -153,8 +153,7 @@ function startPageTemplate() {
   // define variable to hold wireframe start page html
   // return that variable
   let startPage = `  <div class ="container">
-    <h2>US Geography Quiz</h2>
-    <img class = "image" src ="#" alt="Opening picture">
+    <h2 id="title">US Geography Quiz</h2>
     <button id="start">New Quiz</button>
   </div>`;
   return startPage;
