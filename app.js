@@ -89,16 +89,15 @@ const store = {
 
 // These functions return HTML templates
 
-function questionPage(){
-let currentQuestion = store.questions[store.questionNumber]
-let display = `<form class="question"> <h2> ${currentQuestion.question}<br>` 
-for (let i = 0; i < 4; i++){
-display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
-<label for="n${i}">${currentQuestion.answers[i]}</label><br>`
-}
-display += `<button type="submit"> Submit</button></form>`
-submitAnswer()
-render(display)
+function questionPageTemplate(){
+  let currentQuestion = store.questions[store.questionNumber];
+  let display = `<form class="question"> <h2> ${currentQuestion.question}<br>` 
+  for (let i = 0; i < 4; i++){
+    display += `<input type="radio" name="answer" value="${currentQuestion.answers[i]}">
+      <label for="n${i}">${currentQuestion.answers[i]}</label><br>`
+    };
+  display += `<button type="submit"> Submit</button></form>`;
+  return display;
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -108,14 +107,21 @@ render(display)
 
 // These functions handle events (submit, click, etc)
 
-function submitAnswer(){
+function handleQuestionSubmit(){
   $('main').on('submit', '.question', function(e){
-    e.preventDefault()
-    let currentQuestion = store.questions[store.questionNumber]
-    if ($("input[name='answer']:checked").val() === currentQuestion.correctAnswer) console.log("CORRECT!")
-    else console.log("WRONG!")
+    e.preventDefault();
+    let currentQuestion = store.questions[store.questionNumber];
+    let answer = $("input[name='answer']:checked").val();
+    if ( answer === currentQuestion.correctAnswer) {
+       console.log("CORRECT!")
+    } else {
+      console.log("WRONG!")
+    };
+  });
+  store.questionNumber++;
+  render();
+  }
 
-$(questionPage())
 function startPageTemplate() {
   // define variable to hold wireframe start page html
   // return that variable
