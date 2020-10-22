@@ -6,7 +6,14 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
-
+body {
+  background-image: url('./photos/tall-image.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #303131;
+  width:auto;
+  height:auto;
+}
 h1{
   text-align: center;
   text-shadow: 2px 2px #fff000;
@@ -34,7 +41,7 @@ h2 {
  margin-top: 50px;
  z-index: 666;
 }
-.background{
+/* .background{
  display: block;
  background-image: url('./photos/map-of-usa.jpg');
  background-color: #cccccc;
@@ -43,7 +50,7 @@ h2 {
  max-width: 100%;
  top: 30px;
  z-index: -5;
-}
+} */
 .image{
  display: block;
  margin-left: auto;
